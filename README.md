@@ -1,4 +1,4 @@
-# bmi-calculator-in-react-native
+# bmi-calculator-react-native
 My version of the bmi calculator app in react native!
 
 ## How to Start
