@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableOpacity,
-  TextInput,
   View,
   Keyboard,
   TouchableWithoutFeedback,
   KeyboardAvoidingView } from 'react-native';
 import UserResults from './components/UserResults';
 import BmiNumber from './components/BmiNumber';
+import Height from './components/Height';
+import Weight from './components/Weight';
+import BmiButton from './components/BmiButton';
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class App extends Component {
     });
   }
 
-  calcBmi() {
+  calcBmi = () => {
     const { heightFeet, heightInches, weightPounds } = this.state;
     const numHeightFeet = Number(heightFeet);
     const numHeightInches = Number(heightInches);
@@ -58,7 +59,6 @@ class App extends Component {
 
   render() {
     const { heightFeet, heightInches, weightPounds, results, fontLoaded } = this.state;
-    const disabled = (heightFeet === "" || heightInches  === "" || weightPounds === "" ? true : false);
 
     if (!fontLoaded) {
       return (
@@ -79,54 +79,26 @@ class App extends Component {
               <BmiNumber getResults={results} />
               <UserResults getResults={results} />
 
-              {/*height in feet*/}
-              <Text style={styles.inputLabels}>
-                Height
-              </Text>
-              <TextInput
-                placeholder="Feet"
-                name={"heightFeet"}
-                autoComplete="off"
-                keyboardType="numeric"
-                value={this.state.heightFeet}
-                onChangeText={(value) => this.handleBmi('heightFeet', value)}
-                style={[styles.input, styles.feet]}
-              />
-
-              {/*height in inches*/}
-              <TextInput
-                placeholder="Inches"
-                name="heightInches"
-                autoComplete="off"
-                keyboardType="numeric"
-                value={this.state.heightInches}
-                onChangeText={(value) => this.handleBmi('heightInches', value)}
-                style={[styles.input, styles.inches]}
+              {/*height in feet and inches*/}
+              <Height
+                heightFeet={heightFeet}
+                heightInches={heightInches}
+                handleBmi={this.handleBmi}
               />
 
               {/*weight in pounds*/}
-              <Text style={styles.inputLabels}>
-                Weight
-              </Text>
-              <TextInput
-                placeholder="Pounds"
-                name="weightPounds"
-                autoComplete="off"
-                keyboardType="numeric"
-                value={this.state.weightPounds}
-                onChangeText={(value) => this.handleBmi('weightPounds', value)}
-                style={styles.input}
+              <Weight
+                weightPounds={weightPounds}
+                handleBmi={this.handleBmi}
               />
 
               {/*calculate bmi button*/}
-              <TouchableOpacity
-                style={styles.button}
-                disabled={disabled}
-                onPress={() => this.calcBmi()}>
-                  <Text style={styles.buttonText}>
-                    Calculate
-                  </Text>
-              </TouchableOpacity>
+              <BmiButton
+                heightFeet={heightFeet}
+                heightInches={heightInches}
+                weightPounds={weightPounds}
+                calcBmi={this.calcBmi}
+              />
           </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     );
@@ -149,38 +121,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Bold',
     fontSize: 21,
     letterSpacing: 1.8
-  },
-  inputLabels: {
-    color: '#fff',
-    fontFamily: 'Poppins-Regular',
-    marginBottom: 6,
-    position: 'relative',
-    right: 115
-  },
-  input: {
-    backgroundColor: '#eee',
-    borderRadius: 5,
-    height: 40,
-    paddingLeft: 8,
-    width: '75%'
-  },
-  feet: {
-    marginBottom: 4.5
-  },
-  inches: {
-    marginBottom: 25
-  },
-  button: {
-    backgroundColor: '#87ceeb',
-    borderRadius: 8,
-    marginTop: 45,
-    width: '75%'
-  },
-  buttonText: {
-    fontFamily: 'Poppins-Bold',
-    letterSpacing: 2.5,
-    padding: 15,
-    textAlign: 'center'
   }
 });
 
