@@ -11,6 +11,7 @@ import BmiNumber from './components/BmiNumber';
 import Height from './components/Height';
 import Weight from './components/Weight';
 import BmiButton from './components/BmiButton';
+import Footer from './components/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -99,6 +100,8 @@ class App extends Component {
                 weightPounds={weightPounds}
                 calcBmi={this.calcBmi}
               />
+
+              <Footer />
           </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     );
