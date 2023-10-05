@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import useFonts from './useFonts';
 
 import {
   StyleSheet,
@@ -49,14 +50,15 @@ class App extends Component {
     });
   }
 
+  async loadFonts() {
+      await useFonts();
+      this.setState({
+        fontLoaded: true
+    });
+  }
+
   async componentDidMount() {
-    await Font.loadAsync({
-      'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
-      'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
-    });
-    this.setState({
-      fontLoaded: true
-    });
+    this.loadFonts();
   }
 
   render() {
