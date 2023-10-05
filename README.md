@@ -8,6 +8,7 @@ My version of the bmi calculator app in react native!
 
 ## Tested Devices
 - Apple iPhone X (iOS)
+- Apple iPhone 14 Pro (iOS)
 
 ## License
 GNU General Public License v3.0
