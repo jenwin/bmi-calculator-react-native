@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   StyleSheet,
   Text,
@@ -49,7 +50,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    await Expo.Font.loadAsync({
+    await Font.loadAsync({
       'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
       'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf')
     });
